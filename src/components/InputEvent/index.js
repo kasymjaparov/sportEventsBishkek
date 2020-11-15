@@ -10,7 +10,7 @@ function App() {
     registerLocale("ru", ru)
     const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       const[select, setSelect] = useState()
-      const[date, setDate] = useState(new Date())
+      const[date, setDate] = useState('')
       const[number, setNumber]=React.useState('')
       const[author, setAuthor]=React.useState('')
       const[place, setPlace]=React.useState('')
@@ -58,6 +58,8 @@ function App() {
       timeIntervals={15}
       timeInputLabel="Время:"
       dateFormat="dd/MM/yyyy h:mm "
+      disabledKeyboardNavigation
+      placeholderText="Дата и время"
       locale="ru"
     />
     <div className="row">
@@ -65,7 +67,8 @@ function App() {
           <div className="row">
             <div className="input-field col s12">
                <NumberFormat className='inputEvent_number' onChange={(event) => setNumber(event.target.value)}
-        value={number} format="+996 (###) ######" placeholder='+996 (###) ######'  mask="_"/>
+        value={number} format="+996 (###) ######" mask="_"/>
+            <label >Контакты</label>
             </div>
           </div>
         </form>

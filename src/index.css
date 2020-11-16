@@ -1,3 +1,4 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
 /* Обнуление */
 *{padding: 0;margin: 0;border: 0;}
 *,*:before,*:after{
@@ -32,8 +33,7 @@ width: 100%;
 overflow-x: hidden;
 }
 .app_title{
-    width: 90%;
-    margin: 0 auto 0 auto ;
+    width: 100%;
     border-radius: 6px;
     height: auto;
     background:rgb(250, 250, 250);
@@ -43,13 +43,13 @@ overflow-x: hidden;
     padding: 5px;
     color:rgb(78, 62, 62);
     font-size: 30px;
-
+margin: 10px 0px 0px 0px ;
 }
 .inputEvent{
-    width: 50%;
+    width: 320px;
     background:white;
     border-radius: 10px;
-    margin-left: 10px;
+    
 }
 .inputEvent_title{
  font-size: 1.8em; 
@@ -85,4 +85,33 @@ overflow-x: hidden;
 }
 .inputEvent_number::placeholder,.react-datepicker__input-container input::placeholder{
     color:#9e9e9e ;
+}
+.mainWrapper,.api_card-wrapper{
+    width: 95%;
+    margin: 0 auto 0 auto ;
+}
+.app_row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 15px 0px 0px 0px ;
+}
+@media(max-width:340px){
+    .inputEvent{
+        width: 100%;
+    }
+    .mainWrapper,.api_card-wrapper{
+        width: 100%;
+        margin: 0 auto 0 auto ;
+    }
+}
+@media(max-width:675px){
+    .app_row{
+        display: flex;
+        justify-content: center;
+        
+    }
+    .app_title{
+    font-size: 20px;
+    }
 }

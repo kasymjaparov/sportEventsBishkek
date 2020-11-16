@@ -22,7 +22,7 @@ function App() {
       }
   return (
     <div className="inputEvent">
-      <h2 className='inputEvent_title'>Создать мероприятие</h2>
+      <h2 className='inputEvent_title'>Создать мероприятие </h2>
       <div className="row">  
         <form className="col s12">
           <div className="row">
@@ -62,6 +62,7 @@ function App() {
       placeholderText="Дата и время"
       locale="ru"
     />
+   
     <div className="row">
         <form className="col s12">
           <div className="row">

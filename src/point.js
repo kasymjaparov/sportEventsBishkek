@@ -1,2 +1,2 @@
-const point = 'http://localhost:1111'
+const point = 'https://apievents-bishkek.herokuapp.com'
 export default point

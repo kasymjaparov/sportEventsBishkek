@@ -4,9 +4,12 @@ import DatePicker,{ registerLocale } from "react-datepicker";
 import NumberFormat from 'react-number-format'
 import ru from "date-fns/locale/ru"; 
 import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch } from 'react-redux';
+import { createPost } from '../../redux/actions/index';
 import 'materialize-css';
 
 function App() {
+  const dispatch = useDispatch();
     registerLocale("ru", ru)
     const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       const[select, setSelect] = useState()
@@ -16,7 +19,9 @@ function App() {
       const[place, setPlace]=React.useState('')
       const handleClick=()=>{
         if(select&&date&&number&&author.length>=3&&place.length>=7){
-          console.log(select,date,number,author,place);
+          dispatch(createPost({
+            "author":author,"date":date,"select":select,"number":number,"place":place
+          }))
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
         }
       }
@@ -75,7 +80,7 @@ function App() {
         </form>
       </div>
      <br/>
-     <button onClick={handleClick} className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+     <button onClick={handleClick} className="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
     </div>
   );
 }

@@ -12,23 +12,9 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts());
-  }, []);
+  });
   const state = useSelector((state)=>state.posts)
   console.log(state);
-  // const [loading, setLoading] = React.useState(true)
-  // const [failed, setFailed] = React.useState(false)
-  // const [todos, setTodos] = React.useState([])
-  // React.useEffect(() => {
-  //   fetch(`${point}/list`)
-  //     .then((response) => response.json())
-  //     .then((json) =>{
-  //       setLoading(false)
-  //       setTodos(json)//usestate получает массив
-  //     })
-  //       .catch((err)=>{
-  //         setLoading(false)
-  //         setFailed(true)
-  //       })},[])
   return (
     <div className="app">
       <MainWrapper>
@@ -38,12 +24,8 @@ function App() {
       {state.map((item) => (
          <TodoInput key={item.id} data={item}/>
         )).reverse()}
-      {/* {loading&&<div className="app_load">Загрузка...</div>}
-      {failed&&<div className='api_card_error'>Не удалось получить список мероприятий !</div>} */}
       </div>
-      
       </MainWrapper>
-     
     </div>
   )
 }

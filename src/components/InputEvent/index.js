@@ -22,6 +22,9 @@ function App() {
           dispatch(createPost({
             "author":author,"date":date,"select":select,"number":number,"place":place
           }))
+          localStorage.setItem('myData',[{
+            "author":author,"date":date,"select":select,"number":number,"place":place
+          }] );
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
         }
       }
@@ -59,6 +62,7 @@ function App() {
       selected={date}
       onChange={date => setDate(date)}
       showTimeInput
+      minDate={new Date()}
       timeFormat="p"
       timeIntervals={15}
       timeInputLabel="Время:"

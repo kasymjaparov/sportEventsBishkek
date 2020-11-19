@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
+import todo from './todo'
 
-import posts from './posts';
-
-export const reducers = combineReducers({ posts });
+export default combineReducers({
+  todo,
+})

@@ -2,9 +2,12 @@ import React from 'react'
 import 'materialize-css'
 import './index.css'
 import Moment from 'react-moment'
+import { useDispatch } from 'react-redux';
+
 import 'moment/locale/ru'
 
 function App(props) {
+    const dispatch = useDispatch();
   return (
     <div className="api_card">
         <header className={`api_card_header ${props.data.select}`}>
@@ -39,6 +42,7 @@ function App(props) {
                 <span>Контакты:</span>
                 {props.data.number}
              </div>
+             <button className="api_card_body_delete">Удалить</button>
          </div>
      </div>
     </div>

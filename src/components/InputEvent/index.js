@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Select from 'react-select';
 import DatePicker,{ registerLocale } from "react-datepicker";
 import NumberFormat from 'react-number-format'
 import ru from "date-fns/locale/ru"; 
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch } from 'react-redux';
-import { createPost } from '../../redux/actions/index';
+import { useDispatch,useSelector } from 'react-redux';
+import {addTodo} from '../../redux/actions/index'
+import {getTodos} from '../../redux/actions/index'
 import 'materialize-css';
 
 function App() {
   const dispatch = useDispatch();
+  const success = useSelector(state=>state.todo.add.success)
+  const loading = useSelector(state=>state.todo.add.loading)
+  const error = useSelector(state=>state.todo.add.error)
+  useEffect(()=>{
+    if(success) dispatch(getTodos())
+     },[getTodos,success])
+  
     registerLocale("ru", ru)
     const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       const[select, setSelect] = useState()
@@ -17,17 +25,14 @@ function App() {
       const[number, setNumber]=React.useState('')
       const[author, setAuthor]=React.useState('')
       const[place, setPlace]=React.useState('')
-      const handleClick=()=>{
+      const handleClick=(e)=>{
+        e.preventDefault()
         if(select&&date&&number&&author.length>=3&&place.length>=7){
-          dispatch(createPost({
-            "author":author,"date":date,"select":select,"number":number,"place":place
-          }))
-          localStorage.setItem('myData',[{
-            "author":author,"date":date,"select":select,"number":number,"place":place
-          }] );
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
+        dispatch(addTodo({ "author":author,"date":date,"select":select,"number":number,"place":place}))
         }
       }
+      
   return (
     <div className="inputEvent">
       <h2 className='inputEvent_title'>Создать мероприятие </h2>
@@ -84,7 +89,11 @@ function App() {
         </form>
       </div>
      <br/>
-     <button onClick={handleClick} className="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
+     <div className="inputEventRow"><button onClick={e=>handleClick(e)} className="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
+     {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
+     {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
+     {error&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
+     </div>
     </div>
   );
 }

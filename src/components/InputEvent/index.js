@@ -31,7 +31,7 @@ function App() {
         if(select&&date&&number&&author.length>=3&&place.length>=7){
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
         dispatch(addTodo({ "id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}))
-        let list=JSON.parse(window.localStorage.getItem('sportevents'))
+        let list=JSON.parse(window.localStorage.getItem('sportevents'))||window.localStorage.setItem('sportevents',JSON.stringify([{id:123}]))
         window.localStorage.setItem('sportevents',JSON.stringify([...list,{"id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}]))
         }
       }

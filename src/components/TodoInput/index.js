@@ -9,16 +9,22 @@ import 'moment/locale/ru'
 
 function App(props) {
     const dispatch = useDispatch();
+    const localList = JSON.parse(window.localStorage.getItem('sportevents'))
+    console.log(localList)
+    console.log(props.data)
+      const localListBool=localList.some(item=> item.id==props.data.id)
     const success = useSelector(state=>state.todo.delete.success)
     const failed = useSelector(state=>state.todo.delete.failed)
     const loading = useSelector(state=>state.todo.delete.loading)
+
     const deleteItem=(e)=>{
 dispatch(deleteTodo(props.data.id))
     }
+
     useEffect(()=>{
         if(success) dispatch(getTodos())
-        
          },[getTodos,success])
+
   return (
     <div className="api_card">
         <header className={`api_card_header ${props.data.select}`}>
@@ -54,7 +60,7 @@ dispatch(deleteTodo(props.data.id))
                 {props.data.number}
              </div>
              <div className="inputEventRow">
-           {true&&<button onClick={e=>deleteItem(e)} className="api_card_body_delete">Удалить</button>}  
+           {localListBool&&<button onClick={e=>deleteItem(e)} className="api_card_body_delete">Удалить</button>}  
              {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
              {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
              </div>

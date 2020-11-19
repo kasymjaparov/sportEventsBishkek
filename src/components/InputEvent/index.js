@@ -29,10 +29,11 @@ function App() {
       const handleClick=(e)=>{
         e.preventDefault()
         if(select&&date&&number&&author.length>=3&&place.length>=7){
+          let id = shortid.generate()
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
-        dispatch(addTodo({ "id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}))
+        dispatch(addTodo({ "id":id,"author":author,"date":date,"select":select,"number":number,"place":place}))
         let list=JSON.parse(window.localStorage.getItem('sportevents'))||window.localStorage.setItem('sportevents',JSON.stringify([{id:123}]))
-        window.localStorage.setItem('sportevents',JSON.stringify([...list,{"id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}]))
+        window.localStorage.setItem('sportevents',JSON.stringify([...list,{"id":id,"author":author,"date":date,"select":select,"number":number,"place":place}]))
         }
       }
       

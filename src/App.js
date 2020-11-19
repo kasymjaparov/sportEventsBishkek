@@ -9,6 +9,7 @@ import TodoInput from './components/TodoInput/index'
 
 function App() {
   const dispatch = useDispatch();
+  
   const state = useSelector(state=>state.todo.data)
   const loading = useSelector(state=>state.todo.get.loading)
   const failed = useSelector(state=>state.todo.get.failed)

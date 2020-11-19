@@ -4,6 +4,7 @@ import DatePicker,{ registerLocale } from "react-datepicker";
 import NumberFormat from 'react-number-format'
 import ru from "date-fns/locale/ru"; 
 import "react-datepicker/dist/react-datepicker.css";
+import shortid from 'shortid'
 import { useDispatch,useSelector } from 'react-redux';
 import {addTodo} from '../../redux/actions/index'
 import {getTodos} from '../../redux/actions/index'
@@ -14,10 +15,10 @@ function App() {
   const success = useSelector(state=>state.todo.add.success)
   const loading = useSelector(state=>state.todo.add.loading)
   const failed = useSelector(state=>state.todo.add.failed)
+
   useEffect(()=>{
     if(success) dispatch(getTodos())
      },[getTodos,success])
-  
     registerLocale("ru", ru)
     const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       const[select, setSelect] = useState()
@@ -29,7 +30,9 @@ function App() {
         e.preventDefault()
         if(select&&date&&number&&author.length>=3&&place.length>=7){
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
-        dispatch(addTodo({ "author":author,"date":date,"select":select,"number":number,"place":place}))
+        dispatch(addTodo({ "id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}))
+        let list=JSON.parse(window.localStorage.getItem('sportevents'))
+        window.localStorage.setItem('sportevents',JSON.stringify([...list,{"id":shortid.generate(),"author":author,"date":date,"select":select,"number":number,"place":place}]))
         }
       }
       
@@ -83,13 +86,14 @@ function App() {
             <div className="input-field col s12">
                <NumberFormat className='inputEvent_number' onChange={(event) => setNumber(event.target.value)}
         value={number} format="+996 (###) ######" mask="_"/>
-            <label>Номер телефона</label>
+            <label>Контакты</label>
             </div>
           </div>
         </form>
       </div>
      <br/>
      <div className="inputEventRow"><button onClick={e=>handleClick(e)} className="btn waves-effect waves-light">Отправить</button>
+     {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
      {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
      {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
      </div>

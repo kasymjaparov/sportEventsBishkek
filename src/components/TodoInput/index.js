@@ -8,6 +8,10 @@ import {getTodos} from '../../redux/actions/index'
 import 'moment/locale/ru'
 
 function App(props) {
+    let localStorageList=JSON.parse(window.localStorage.getItem('sportevents'))
+    console.log(localStorageList)
+   let localStorageListBool =  localStorageList.some(item=>item.id==props.data.id)
+  console.log(localStorageListBool)
     const dispatch = useDispatch();
     const success = useSelector(state=>state.todo.delete.success)
     const failed = useSelector(state=>state.todo.delete.failed)
@@ -17,6 +21,7 @@ dispatch(deleteTodo(props.data.id))
     }
     useEffect(()=>{
         if(success) dispatch(getTodos())
+        
          },[getTodos,success])
   return (
     <div className="api_card">
@@ -49,16 +54,14 @@ dispatch(deleteTodo(props.data.id))
             </Moment>
              </div>
              <div className="api_card_body_contact">
-                <span>Контакты:</span>
+                <span>Номер телефона:</span>
                 {props.data.number}
              </div>
              <div className="inputEventRow">
-             <button onClick={e=>deleteItem(e)} className="api_card_body_delete">Удалить</button>
-             {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
+           {localStorageListBool&&<button onClick={e=>deleteItem(e)} className="api_card_body_delete">Удалить</button>}  
              {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
              {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
              </div>
-            
          </div>
      </div>
     </div>

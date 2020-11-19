@@ -9,9 +9,7 @@ import 'moment/locale/ru'
 
 function App(props) {
     const dispatch = useDispatch();
-    const localList = JSON.parse(window.localStorage.getItem('sportevents'))
-    console.log(localList)
-    console.log(props.data)
+    const localList = JSON.parse(window.localStorage.getItem('sportevents')) || [{id:'123'}]
       const localListBool=localList.some(item=> item.id==props.data.id)
     const success = useSelector(state=>state.todo.delete.success)
     const failed = useSelector(state=>state.todo.delete.failed)

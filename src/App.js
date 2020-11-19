@@ -11,7 +11,7 @@ function App() {
   const dispatch = useDispatch();
   const state = useSelector(state=>state.todo.data)
   const loading = useSelector(state=>state.todo.get.loading)
-  const error = useSelector(state=>state.todo.get.error)
+  const failed = useSelector(state=>state.todo.get.failed)
  useEffect(()=>{
 dispatch(getTodos())
  },[getTodos])
@@ -22,8 +22,8 @@ dispatch(getTodos())
       <div className='app_row'>
       <InputEvent/>
       {loading&&<div className="app_loading">Загрузка...</div>}
-      {error&&<div className="app_loading">Ошибка</div>}
-        {!state.length ? <div className="app_loading">Мероприятий пока нет</div>:
+      {failed&&<div className="app_loading">Ошибка</div>}
+        {
         state.map((item) => (
           <TodoInput key={item.id} data={item}/>
          )).reverse()

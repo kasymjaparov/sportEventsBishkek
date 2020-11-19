@@ -21,7 +21,6 @@ const checkResponse = (response, errText) => {
   
   export const addTodo = (body) => (dispatch) => {
     dispatch({ type: 'ADD_TODO_LOADING' })
-    console.log(body)
     fetch(`${point}/add`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -33,5 +32,22 @@ const checkResponse = (response, errText) => {
       })
       .catch((error) => {
         dispatch({ type: 'ADD_TODO_FAILED', error: errorHandler(error) })
+      })
+  }
+
+  export const deleteTodo = (body) => (dispatch) => {
+    dispatch({ type: 'DELETE_TODO_LOADING' })
+    fetch(`${point}/delete/${body}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+      .then((response) => checkResponse(response, 'Ошибка удаления'))
+      .then((data) => {
+        dispatch({ type: 'DELETE_TODO_SUCCESS' })
+      })
+      .catch((error) => {
+        dispatch({ type: 'DELETE_TODO_FAILED', error: errorHandler(error) })
       })
   }

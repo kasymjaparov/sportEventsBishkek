@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
   const success = useSelector(state=>state.todo.add.success)
   const loading = useSelector(state=>state.todo.add.loading)
-  const error = useSelector(state=>state.todo.add.error)
+  const failed = useSelector(state=>state.todo.add.failed)
   useEffect(()=>{
     if(success) dispatch(getTodos())
      },[getTodos,success])
@@ -58,7 +58,7 @@ function App() {
           <div className="row">
             <div className="input-field col s12">
               <input value={place} onChange={e=>setPlace(e.target.value)} id="place" type="text" />
-              <label htmlFor="place">Место</label>
+              <label htmlFor="place">Адрес</label>
             </div>
           </div>
         </form>
@@ -83,16 +83,15 @@ function App() {
             <div className="input-field col s12">
                <NumberFormat className='inputEvent_number' onChange={(event) => setNumber(event.target.value)}
         value={number} format="+996 (###) ######" mask="_"/>
-            <label >Контакты</label>
+            <label>Номер телефона</label>
             </div>
           </div>
         </form>
       </div>
      <br/>
-     <div className="inputEventRow"><button onClick={e=>handleClick(e)} className="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
-     {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
+     <div className="inputEventRow"><button onClick={e=>handleClick(e)} className="btn waves-effect waves-light">Отправить</button>
      {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
-     {error&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
+     {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
      </div>
     </div>
   );

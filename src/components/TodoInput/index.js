@@ -1,13 +1,23 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import 'materialize-css'
 import './index.css'
 import Moment from 'react-moment'
-import { useDispatch } from 'react-redux';
-
+import { useDispatch,useSelector } from 'react-redux';
+import {deleteTodo} from '../../redux/actions/index'
+import {getTodos} from '../../redux/actions/index'
 import 'moment/locale/ru'
 
 function App(props) {
     const dispatch = useDispatch();
+    const success = useSelector(state=>state.todo.delete.success)
+    const failed = useSelector(state=>state.todo.delete.failed)
+    const loading = useSelector(state=>state.todo.delete.loading)
+    const deleteItem=(e)=>{
+dispatch(deleteTodo(props.data.id))
+    }
+    useEffect(()=>{
+        if(success) dispatch(getTodos())
+         },[getTodos,success])
   return (
     <div className="api_card">
         <header className={`api_card_header ${props.data.select}`}>
@@ -42,7 +52,13 @@ function App(props) {
                 <span>Контакты:</span>
                 {props.data.number}
              </div>
-             <button className="api_card_body_delete">Удалить</button>
+             <div className="inputEventRow">
+             <button onClick={e=>deleteItem(e)} className="api_card_body_delete">Удалить</button>
+             {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
+             {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
+             {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
+             </div>
+            
          </div>
      </div>
     </div>

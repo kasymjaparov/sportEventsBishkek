@@ -32,7 +32,7 @@ function App() {
           let id = shortid.generate()
           setSelect(''); setDate('');setNumber('');setAuthor('');setPlace('') 
         dispatch(addTodo({ "id":id,"author":author,"date":date,"select":select,"number":number,"place":place}))
-        let list=JSON.parse(window.localStorage.getItem('sportevents'))||window.localStorage.setItem('sportevents',JSON.stringify([{id:123}]))
+        let list=JSON.parse(window.localStorage.getItem('sportevents'))||window.localStorage.setItem('sportevents',JSON.stringify([{ "id":id,"author":author,"date":date,"select":select,"number":number,"place":place}]))
         window.localStorage.setItem('sportevents',JSON.stringify([...list,{"id":id,"author":author,"date":date,"select":select,"number":number,"place":place}]))
         }
       }

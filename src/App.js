@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import 'materialize-css';
 import { useDispatch,useSelector } from 'react-redux';
-import {getTodos} from './redux/actions/index'
+import { getTodos, deleteTodo } from './redux/actions/index'
 import './index.css'
 import InputEvent from './components/InputEvent/index'
 import MainWrapper from './components/MainWrapper'
@@ -9,12 +9,18 @@ import TodoInput from './components/TodoInput/index'
 
 function App() {
   const dispatch = useDispatch();
-  
   const state = useSelector(state=>state.todo.data)
   const loading = useSelector(state=>state.todo.get.loading)
   const failed = useSelector(state=>state.todo.get.failed)
  useEffect(()=>{
 dispatch(getTodos())
+state.forEach(item=>{
+  if(new Date(item.date).getTime()<new Date().getTime()){
+    console.log("yes")
+    console.log(item.id)
+    return dispatch(deleteTodo(item.id));
+  }
+})
  },[getTodos])
   return (
     <div className="app">
@@ -35,4 +41,4 @@ dispatch(getTodos())
   )
 }
 
-export default App;
+export default App

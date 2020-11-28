@@ -44,7 +44,7 @@ function App() {
         <form className="col s12">
           <div className="row">
             <div className="input-field col s12">
-              <input value={author} onChange={e=>setAuthor(e.target.value)} id="autor" type="text" />
+              <input maxLength='9' value={author} onChange={e=>setAuthor(e.target.value)} id="autor" type="text" />
               <label htmlFor="autor">Автор</label>
             </div>
           </div>

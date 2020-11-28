@@ -1,9 +1,9 @@
 .api_card{
     width: 320px;
-    height: 521px;
+    min-height: 521px;
 border-radius: 10px;
 background: rgb(255, 255, 255);
-margin: 30px 0px 0px 0px ;
+margin: 30px 10px 0px 0px ;
 }
 
 .api_card_header{
@@ -55,7 +55,7 @@ margin: 30px 0px 0px 0px ;
     font-size: 23px;
     font-weight: 700;
     text-align: center;
-    margin: 40px 0px 0px 0px ;
+    margin: 20px 0px 0px 0px ;
 }
 .api_card_body_date > span,.api_card_body_time>span,.api_card_body_place > span, .api_card_body_contact >span{
     margin: 0px 5px 0px 0px ;
@@ -63,10 +63,11 @@ margin: 30px 0px 0px 0px ;
 
 .api_card_body_date,.api_card_body_time,.api_card_body_place,.api_card_body_contact{
     font-size: 16px;
-    margin: 30px 0px 0px 0px ;
+    margin: 20px 0px 0px 0px ;
 }
 .api_card_body_place{
     margin: 30px 0px 0px 0px ;
+    word-wrap: break-word;
 }
 .api_card_body_delete{
     font-size: 16px;
@@ -78,10 +79,10 @@ margin: 30px 0px 0px 0px ;
 .api_card_body_delete:active{
     background: #ff7043;
 }
-@media(max-width:1300px){
+/* @media(max-width:1300px){
     .api_card{
 margin: 30px 0px 0px 0px ;
-    }}
+    }} */
 
 @media(max-width:675px){
     .api_card{

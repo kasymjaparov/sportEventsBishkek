@@ -16,8 +16,6 @@ function App() {
 dispatch(getTodos())
 state.forEach(item=>{
   if(new Date(item.date).getTime()<new Date().getTime()){
-    console.log("yes")
-    console.log(item.id)
     return dispatch(deleteTodo(item.id));
   }
 })

@@ -14,11 +14,6 @@ function App() {
   const failed = useSelector(state=>state.todo.get.failed)
  useEffect(()=>{
 dispatch(getTodos())
-state.forEach(item=>{
-  if(new Date(item.date).getTime()<new Date().getTime()){
-    return dispatch(deleteTodo(item.id));
-  }
-})
  },[getTodos])
   return (
     <div className="app">

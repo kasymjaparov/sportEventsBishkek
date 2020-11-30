@@ -16,16 +16,21 @@ function App() {
   const loading = useSelector(state=>state.todo.add.loading)
   const failed = useSelector(state=>state.todo.add.failed)
 
-  useEffect(()=>{
-    if(success) dispatch(getTodos())
-     },[getTodos,success])
-    registerLocale("ru", ru)
-    const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       const[select, setSelect] = useState()
       const[date, setDate] = useState('')
       const[number, setNumber]=React.useState('')
       const[author, setAuthor]=React.useState('')
       const[place, setPlace]=React.useState('')
+
+  useEffect(()=>{
+    if(success) dispatch(getTodos())
+     },[getTodos,success])
+
+    registerLocale("ru", ru)
+
+    const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
+      
+
       const handleClick=(e)=>{
         e.preventDefault()
         if(select&&date&&number&&author.length>=3&&place.length>=7){
@@ -99,7 +104,7 @@ function App() {
      {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

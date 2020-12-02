@@ -21,6 +21,7 @@ function App() {
       const[number, setNumber]=React.useState('')
       const[author, setAuthor]=React.useState('')
       const[place, setPlace]=React.useState('')
+      const[buttonDisabled, setButtonDisabled]=React.useState(true)
 
   useEffect(()=>{
     if(success) dispatch(getTodos())
@@ -30,6 +31,11 @@ function App() {
 
     const data = [{value: 'Футбол',label: "Football"},{value: 'Баскетбол',label: "Basketball"},{value: 'Теннис',label: "Tennis" }]
       
+useEffect(()=>{
+  if(select&&date&&number&&author.length>=3&&place.length>=7){
+setButtonDisabled(false)
+  }
+},[place,select,number,author,place])
 
       const handleClick=(e)=>{
         e.preventDefault()
@@ -98,7 +104,7 @@ function App() {
         </form>
       </div>
      <br/>
-     <div className="inputEventRow"><button onClick={e=>handleClick(e)} className="btn waves-effect waves-light">Отправить</button>
+     <div  className="inputEventRow"><button disabled={buttonDisabled} onClick={e=>handleClick(e)} className="btn waves-effect waves-light">Отправить</button>
      {success&&<div style={{color:'green'}} className="inputEvent_alert ">Отправлено</div>}
      {loading&&<div style={{color:'blue'}} className="inputEvent_alert ">Загрузка...</div>}
      {failed&&<div style={{color:'red'}} className="inputEvent_alert ">Ошибка отправки</div>}
